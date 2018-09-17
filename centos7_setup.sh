@@ -13,6 +13,7 @@ echo "# Two accounts have been setup on the server- root and c7u1        #"
 echo "# Target IP address is 192.168.0.18                                #"
 echo "####################################################################"
 echo " "
+## Need to add validation for a correct IP address
 echo "Continue with startup process? (Enter yes to continue.)"
 read govar
 if [[ $govar = "yes" ]]; then
