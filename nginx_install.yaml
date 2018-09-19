@@ -13,7 +13,7 @@
     - name: Insert index.html page
       template:
         src: index.html
-        dest: /usr/share/nginx/index.html
+        dest: /usr/share/nginx/html/index.html
     - name: Configure firewall
       firewalld:
         service: http
