@@ -1,0 +1,9 @@
+---
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: Install Java 1.8.0 OpenJDK
+    yum:
+      name: java-1.8.0-openjdk
+      state: present
