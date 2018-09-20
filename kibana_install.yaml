@@ -1,0 +1,34 @@
+---
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: Add Elasticsearch GPG key
+    rpm_key:
+      key: https://packages.elastic.co/GPG-KEY-elasticsearch
+      state: present
+  - name: Add Kibana repository
+    template:
+      src: kibana.repo.j2
+      dest: /etc/yum.repos.d/kibana.repo
+      mode: 0644
+  - name: Install kibana
+    package:
+      name: kibana
+      state: present
+  - name: Enable and start Kibana at boot
+    service:
+      name: kibana
+      state: started
+      enabled: yes
+  - name: Copy Kibana configuration
+    template:
+      src: kibana.yml.j2
+      dest: "/opt/kibana/config/kibana.yml"
+      owner: root
+      group: root
+      mode: 0644
+  - name: Restart Kibana
+    service:
+      name: kibana
+      state: restarted

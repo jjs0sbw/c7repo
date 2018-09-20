@@ -1,0 +1,22 @@
+---
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - name: Download Elasticsearch 6.x
+    get_url:
+      url: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.4.0.rpm
+      dest: /tmp/elasticsearch-6.4.0.rpm
+  - name: Install Elasticsearch 6.x
+    yum:
+      name: /tmp/elasticsearch-6.4.0.rpm
+      state: present
+  - name: Enable elasticsearch to start on boot
+    service:
+      name: elasticsearch
+      state: started
+      enabled: true
+  - name: Start or restart elasticsearch
+    command: systemctl restart elasticsearch.service
+    ignore_errors: true
+    
